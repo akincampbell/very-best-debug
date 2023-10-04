@@ -16,13 +16,13 @@ class VenuesController < ApplicationController
   end
 
   def create
-    venue = Venue.new
-    venue.address = params.fetch("query_address")
-    venue.name = params.fetch("query_name")
-    venue.neighborhood = params.fetch("query_neighborhood")
-    venue.save
+    @the_venue = Venue.new
+    @the_venue.address = params.fetch("query_address")
+    @the_venue.name = params.fetch("query_name")
+    @the_venue.neighborhood = params.fetch("query_neighborhood")
+    @the_venue.save
 
-    redirect_to("/venues/#{venue.name}")
+    redirect_to("/venues/#{@the_venue.name}")
   end
   
   def update

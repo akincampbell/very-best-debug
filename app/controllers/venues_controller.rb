@@ -22,7 +22,7 @@ class VenuesController < ApplicationController
     @the_venue.neighborhood = params.fetch("query_neighborhood")
     @the_venue.save
 
-    redirect_to("/venues/#{@the_venue.name}")
+    redirect_to("/venues/#{@the_venue.id}")
   end
   
   def update
@@ -34,14 +34,14 @@ class VenuesController < ApplicationController
     @venue.neighborhood = params.fetch("query_neighborhood")
     @venue.save
     
-    redirect_to("/venues/#{venue.id}")
+    redirect_to("/venues/#{@venue.id}")
   end
 
   def destroy
     the_id = params.fetch("venue_id")
     matching_venues = Venue.where({ :id => the_id })
-    venue = matching_venues
-    venue.destroy
+    @venue = matching_venues.at(0)
+    @venue.destroy
 
     redirect_to("/venues")
   end
